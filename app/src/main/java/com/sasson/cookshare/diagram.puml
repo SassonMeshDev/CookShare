@@ -1,0 +1,209 @@
+@startuml
+class MainActivity {
+#   firebaseAuth: FirebaseAuth
+#   firebaseUser: FirebaseUser
++ btnLogout(view: View)
++ btnResetPassword(view: View)
++ btnVerifyEmail(view: View)
++ btn_uploadActivity(view: View)
++ onBackPressed()
+# onCreate(savedInstanceState: Bundle)
+}
+
+class AuthenticationActivity {
+# onCreate(savedInstanceState: Bundle)
+}
+
+class UploadRecipe {
+#   firebaseAuth: FirebaseAuth
+#   firebaseFirestore: FirebaseFirestore
+#   imageUrl: String
+#   recipeImage: ImageView
+#   txt_description: EditText
+#   txt_name: EditText
+#   txt_price: EditText
+#   uri: Uri
+#   userID: String
+
++ btnSelectImage(view: View)
++ btnUploadRecipe(view: View)
+# onActivityResult(requestCode: int, resultCode: int, data: Intent)
+# onCreate(savedInstanceState: Bundle)
++ uploadImage(view: View)
++ uploadRecipe(view: View)
+}
+
+class UpdateRecipe {
+#   databaseReference: DatabaseReference
+#   firebaseAuth: FirebaseAuth
+#   firebaseFirestore: FirebaseFirestore
+#   imageUrl: String
+#   key: String
+#   oldImageUrl: String
+#   recipeDescription: String
+#   recipeImage: ImageView
+#   recipeKey: String
+#   recipePrice: String
+#   recipename: String
+#   storageReference: StorageReference
+#   txt_description: EditText
+#   txt_name: EditText
+#   txt_price: EditText
+#   uri: Uri
+#   userID: String
++ btnSelectImage(view: View)
++ btnUpdateRecipe(view: View)
+# onActivityResult(requestCode: int, resultCode: int, data: Intent)
+# onCreate(savedInstanceState: Bundle)
++ uploadRecipe()
+}
+
+class RegisterActivity {
+#   TAG: String
+#   firebaseAuth: FirebaseAuth
+#   firebaseFirestore: FirebaseFirestore
+#   mEmail: EditText
+#   mLogin: TextView
+#   mName: EditText
+#   mPassword: EditText
+#   mPhone: EditText
+#   mProgressBar: ProgressBar
+#   userID: String
+
++ login(view: View)
+# onCreate(savedInstanceState: Bundle)
++ register(view: View)
+}
+
+class LoginActivity {
+#   firebaseAuth: FirebaseAuth
+#   loginProgressBar: ProgressBar
+#   txt_login: EditText
+#   txt_password: EditText
++ btnForgotPassword(view: View)
++ btnGuestLogin(view: View)
++ btnLogin(view: View)
++ btnRegister(view: View)
+# onCreate(savedInstanceState: Bundle)
+}
+
+class FoodData {
+-   itemDescription: String
+-   itemImage: String
+-   itemName: String
+-   itemPrice: String
+-   key: String
+-   recipeKey: String
+}
+
+class MyAdapter {
+#   firebaseAuth: FirebaseAuth
+#   firebaseFirestore: FirebaseFirestore
+-   lastPosition:
+-   mContext: Context
+-   myFoodList: List<FoodData>
+#   recipeKey: String
+#   userID: String
++ filteredList(filterList: ArrayList<FoodData>)
++ onBindViewHolder(holder: FoodViewHolder, position: int)
++ onCreateViewHolder(parent: ViewGroup, viewType: int): FoodViewHolder
+}
+
+class FavoritesFragment {
+#   TAG: String
+-   databaseReference: DatabaseReference
+-   eventListener: ValueEventListener
+-   favoritesViewModel: FavoritesViewModel
+#   firebaseAuth: FirebaseAuth
+#   firebaseFirestore: FirebaseFirestore
+#   mFoodData: FoodData
+#   mRecyclerView: RecyclerView
+#   myAdapter: MyAdapter
+#   myFoodList: List<FoodData>
+#   progressDialog: ProgressDialog
+#   txt_empty: TextView
+#   txt_search: EditText
+#   userId: String
+}
+
+class FavoritesViewModel {
+-   mText: MutableLiveData<String>
+}
+
+
+class DashboardFragment {
+-   dashboardViewModel: DashboardViewModel
+#   firebaseAuth: FirebaseAuth
+#   firebaseFirestore: FirebaseFirestore
+#   mRecyclerView: RecyclerView
+#   myAdapter: MyAdapter
+#   myFoodList: List<FoodData>
+#   progressDialog: ProgressDialog
+#   txt_no_result_found: TextView
+#   txt_search: EditText
+#   userID: String
+}
+
+class DashboardViewModel {
+-   mText: MutableLiveData<String>
+}
+
+class NotificationsFragment {
+#   btnVerifyEmail: LinearLayout
+#   firebaseAuth: FirebaseAuth
+#   firebaseFirestore: FirebaseFirestore
+-   notificationsViewModel: NotificationsViewModel
+#   photo_imageView: ImageView
+#   txt_email: TextView
+#   txt_name: TextView
+#   txt_phone: TextView
+#   txt_verified: TextView
+#   txt_verify: TextView
+#   userID: String
+#   verified_imageview: ImageView
+#   verifyMsg: TextView
+#   verify_imageview: ImageView
++ onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View
+}
+
+class NotificationsViewModel {
+-   mText: MutableLiveData<String>
+}
+
+class HomeFragment {
+#   TAG: String
+-   databaseReference: DatabaseReference
+-   eventListener: ValueEventListener
+#   firebaseAuth: FirebaseAuth
+#   firebaseFirestore: FirebaseFirestore
+-   homeViewModel: HomeViewModel
+#   mFoodData: FoodData
+#   mRecyclerView: RecyclerView
+#   myAdapter: MyAdapter
+#   myFoodList: List<FoodData>
+#   progressDialog: ProgressDialog
+#   txt_no_results_found: TextView
+#   txt_search: EditText
+#   userId: String
+- filter(text: String)
++ onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View
+}
+class HomeViewModel {
+-   mText: MutableLiveData<String?>
+}
+
+
+
+
+NotificationsFragment -> NotificationsViewModel
+HomeFragment -> HomeViewModel
+DashboardFragment -> DashboardViewModel
+FavoritesFragment -> FavoritesViewModel
+
+NotificationsFragment -> MyAdapter
+HomeFragment -> MyAdapter
+DashboardFragment -> MyAdapter
+FavoritesFragment -> MyAdapter
+MyAdapter -> FoodData
+
+@enduml

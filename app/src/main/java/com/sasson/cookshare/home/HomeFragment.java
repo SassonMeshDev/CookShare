@@ -28,13 +28,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sasson.cookshare.LoginActivity;
 import com.sasson.cookshare.FoodData;
 import com.sasson.cookshare.MyAdapter;
 import com.sasson.cookshare.R;
 
 
-public class xHomeFragment extends Fragment {
+public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     RecyclerView mRecyclerView;
